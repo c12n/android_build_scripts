@@ -1,0 +1,20 @@
+name: Build BouncingBall IPA
+
+on:
+  push:
+    paths:
+      - 'ios/BouncingBall/**'
+      - '.github/workflows/build-ios-ipa.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build IPA
+        run: ios/BouncingBall/build_ipa.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BouncingBall-ipa
+          path: ios/BouncingBall/build/BouncingBall.ipa
